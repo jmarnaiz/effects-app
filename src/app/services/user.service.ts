@@ -15,6 +15,12 @@ export class UserService {
   getUsers(): Observable<UserDTO[]> {
     return this._http
       .get<ResponseDTO>(this._url.concat('/users?per_page=6'))
-      .pipe(map((response) => response.data));
+      .pipe(map((response) => response.data as UserDTO[]));
+  }
+
+  getUserById(id: number): Observable<UserDTO> {
+    return this._http
+      .get<ResponseDTO>(this._url.concat('/users/', id.toString()))
+      .pipe(map((response) => response.data as UserDTO));
   }
 }
